@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/HttpClient.dir/HttpClient.cpp.o"
   "CMakeFiles/HttpClient.dir/HttpClient.cpp.o.d"
+  "CMakeFiles/HttpClient.dir/HttpOptions.cpp.o"
+  "CMakeFiles/HttpClient.dir/HttpOptions.cpp.o.d"
   "CMakeFiles/HttpClient.dir/main.cpp.o"
   "CMakeFiles/HttpClient.dir/main.cpp.o.d"
   "HttpClient"

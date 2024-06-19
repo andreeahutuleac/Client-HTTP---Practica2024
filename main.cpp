@@ -42,16 +42,54 @@ int main() {
     //functiile de GET si POST
     try
     {
+        //initializare client
         HttpClient client;
 
-        std::string getUrl="https://jsonplaceholder.typicode.com/posts/1";
-        std::string getResponse = client.get(getUrl);
+        //setare a antetelor personalizate
+        std::map<std::string, std::string> headers;
+        HttpOptions options;
+        options.setBaseUri("https://jsonplaceholder.typicode.com");
+        options.setHeader("Content-Type", "application/json");
+        options.setHeader("Authorization", "Bearer token123");
+
+        //cereri HTTP
+
+      // GET
+        std::string getUrl = "https://jsonplaceholder.typicode.com/posts/1";
+        std::string getResponse = client.request("GET", getUrl);
         std::cout << "GET Response: " << getResponse << std::endl;
-    
+
+        // POST
         std::string postUrl = "https://jsonplaceholder.typicode.com/posts";
         std::string postData = R"({"title": "foo", "body": "bar", "userId": 1})";
-        std::string postResponse = client.post(postUrl, postData);
+        std::string postResponse = client.request("POST", postUrl, options);
         std::cout << "POST Response: " << postResponse << std::endl;
+
+        // PUT
+        std::string putUrl = "https://jsonplaceholder.typicode.com/posts/1";
+        std::string putData = R"({"id": 1, "title": "foo", "body": "bar", "userId": 1})";
+        std::string putResponse = client.request("PUT", putUrl, options);
+        std::cout << "PUT Response: " << putResponse << std::endl;
+
+        // DELETE
+        std::string delUrl = "https://jsonplaceholder.typicode.com/posts/1";
+        std::string delResponse = client.request("DELETE", delUrl);
+        std::cout << "DELETE Response: " << delResponse << std::endl;
+
+        // HEAD
+        std::string headUrl = "https://jsonplaceholder.typicode.com/posts/1";
+        std::string headResponse = client.request("HEAD", headUrl);
+        std::cout << "HEAD Response: " << headResponse << std::endl;
+
+        // OPTIONS
+        std::string optionsUrl = "https://jsonplaceholder.typicode.com";
+        std::string optionsResponse = client.request("OPTIONS", optionsUrl);
+        std::cout << "OPTIONS Response: " << optionsResponse << std::endl;
+
+        //JSON response
+        Json::Value jsonResponse = client.parseJsonResponse(getResponse);
+        std::string title = jsonResponse["title"].asString();
+        std::cout << "Parsed title: " << title << std::endl;
 
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;

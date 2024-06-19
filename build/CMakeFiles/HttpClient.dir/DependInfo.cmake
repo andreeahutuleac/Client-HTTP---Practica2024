@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpClient.cpp" "CMakeFiles/HttpClient.dir/HttpClient.cpp.o" "gcc" "CMakeFiles/HttpClient.dir/HttpClient.cpp.o.d"
+  "/home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpOptions.cpp" "CMakeFiles/HttpClient.dir/HttpOptions.cpp.o" "gcc" "CMakeFiles/HttpClient.dir/HttpOptions.cpp.o.d"
   "/home/andreea/Desktop/git/Client-HTTP---Practica2024/main.cpp" "CMakeFiles/HttpClient.dir/main.cpp.o" "gcc" "CMakeFiles/HttpClient.dir/main.cpp.o.d"
   )
 

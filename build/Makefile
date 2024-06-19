@@ -153,6 +153,30 @@ HttpClient.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HttpClient.dir/build.make CMakeFiles/HttpClient.dir/HttpClient.cpp.s
 .PHONY : HttpClient.cpp.s
 
+HttpOptions.o: HttpOptions.cpp.o
+.PHONY : HttpOptions.o
+
+# target to build an object file
+HttpOptions.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HttpClient.dir/build.make CMakeFiles/HttpClient.dir/HttpOptions.cpp.o
+.PHONY : HttpOptions.cpp.o
+
+HttpOptions.i: HttpOptions.cpp.i
+.PHONY : HttpOptions.i
+
+# target to preprocess a source file
+HttpOptions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HttpClient.dir/build.make CMakeFiles/HttpClient.dir/HttpOptions.cpp.i
+.PHONY : HttpOptions.cpp.i
+
+HttpOptions.s: HttpOptions.cpp.s
+.PHONY : HttpOptions.s
+
+# target to generate assembly for a file
+HttpOptions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HttpClient.dir/build.make CMakeFiles/HttpClient.dir/HttpOptions.cpp.s
+.PHONY : HttpOptions.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -189,6 +213,9 @@ help:
 	@echo "... HttpClient.o"
 	@echo "... HttpClient.i"
 	@echo "... HttpClient.s"
+	@echo "... HttpOptions.o"
+	@echo "... HttpOptions.i"
+	@echo "... HttpOptions.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
