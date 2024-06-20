@@ -8,7 +8,6 @@
 class HttpOptions {
 public:
     HttpOptions& setBaseUri(const std::string& baseUri);
-   //HttpOptions& setHeaders(const std::map<std::string, std::string>& headers);
     HttpOptions& setHeader(const std::string& headerName, const std::string& headerValue);
     const std::string& getBaseUri() const;
     const std::map<std::string, std::string>& getHeaders() const;

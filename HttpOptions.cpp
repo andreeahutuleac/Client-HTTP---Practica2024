@@ -6,11 +6,6 @@ HttpOptions& HttpOptions::setBaseUri(const std::string& baseuri)
     return *this;
 }
 
-// HttpOptions& HttpOptions::setHeaders(const std::map<std::string, std::string>& headers) {
-//     this->headers = headers;
-//     return *this;
-// }
-
 HttpOptions& HttpOptions::setHeader(const std::string& headerName, const std::string& headerValue) {
     this->headers[headerName] = headerValue;
     return *this;

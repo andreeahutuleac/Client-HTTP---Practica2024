@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/andreea/Desktop/git/Client-HTTP---Practica2024/build",
+  "command": "/usr/bin/g++  -I/home/andreea/Desktop/git/Client-HTTP---Practica2024/build/jsoncpp/include -I/home/andreea/Desktop/git/Client-HTTP---Practica2024/json-develop/include -g -std=gnu++11 -o CMakeFiles/HttpClient.dir/main.cpp.o -c /home/andreea/Desktop/git/Client-HTTP---Practica2024/main.cpp",
+  "file": "/home/andreea/Desktop/git/Client-HTTP---Practica2024/main.cpp"
+},
+{
+  "directory": "/home/andreea/Desktop/git/Client-HTTP---Practica2024/build",
+  "command": "/usr/bin/g++  -I/home/andreea/Desktop/git/Client-HTTP---Practica2024/build/jsoncpp/include -I/home/andreea/Desktop/git/Client-HTTP---Practica2024/json-develop/include -g -std=gnu++11 -o CMakeFiles/HttpClient.dir/HttpClient.cpp.o -c /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpClient.cpp",
+  "file": "/home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpClient.cpp"
+},
+{
+  "directory": "/home/andreea/Desktop/git/Client-HTTP---Practica2024/build",
+  "command": "/usr/bin/g++  -I/home/andreea/Desktop/git/Client-HTTP---Practica2024/build/jsoncpp/include -I/home/andreea/Desktop/git/Client-HTTP---Practica2024/json-develop/include -g -std=gnu++11 -o CMakeFiles/HttpClient.dir/HttpOptions.cpp.o -c /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpOptions.cpp",
+  "file": "/home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpOptions.cpp"
+}
+]

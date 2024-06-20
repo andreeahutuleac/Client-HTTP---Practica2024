@@ -73,43 +73,43 @@ CMakeFiles/HttpClient.dir/main.cpp.o: CMakeFiles/HttpClient.dir/flags.make
 CMakeFiles/HttpClient.dir/main.cpp.o: ../main.cpp
 CMakeFiles/HttpClient.dir/main.cpp.o: CMakeFiles/HttpClient.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/andreea/Desktop/git/Client-HTTP---Practica2024/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/HttpClient.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HttpClient.dir/main.cpp.o -MF CMakeFiles/HttpClient.dir/main.cpp.o.d -o CMakeFiles/HttpClient.dir/main.cpp.o -c /home/andreea/Desktop/git/Client-HTTP---Practica2024/main.cpp
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HttpClient.dir/main.cpp.o -MF CMakeFiles/HttpClient.dir/main.cpp.o.d -o CMakeFiles/HttpClient.dir/main.cpp.o -c /home/andreea/Desktop/git/Client-HTTP---Practica2024/main.cpp
 
 CMakeFiles/HttpClient.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HttpClient.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/andreea/Desktop/git/Client-HTTP---Practica2024/main.cpp > CMakeFiles/HttpClient.dir/main.cpp.i
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/andreea/Desktop/git/Client-HTTP---Practica2024/main.cpp > CMakeFiles/HttpClient.dir/main.cpp.i
 
 CMakeFiles/HttpClient.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HttpClient.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/andreea/Desktop/git/Client-HTTP---Practica2024/main.cpp -o CMakeFiles/HttpClient.dir/main.cpp.s
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/andreea/Desktop/git/Client-HTTP---Practica2024/main.cpp -o CMakeFiles/HttpClient.dir/main.cpp.s
 
 CMakeFiles/HttpClient.dir/HttpClient.cpp.o: CMakeFiles/HttpClient.dir/flags.make
 CMakeFiles/HttpClient.dir/HttpClient.cpp.o: ../HttpClient.cpp
 CMakeFiles/HttpClient.dir/HttpClient.cpp.o: CMakeFiles/HttpClient.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/andreea/Desktop/git/Client-HTTP---Practica2024/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/HttpClient.dir/HttpClient.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HttpClient.dir/HttpClient.cpp.o -MF CMakeFiles/HttpClient.dir/HttpClient.cpp.o.d -o CMakeFiles/HttpClient.dir/HttpClient.cpp.o -c /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpClient.cpp
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HttpClient.dir/HttpClient.cpp.o -MF CMakeFiles/HttpClient.dir/HttpClient.cpp.o.d -o CMakeFiles/HttpClient.dir/HttpClient.cpp.o -c /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpClient.cpp
 
 CMakeFiles/HttpClient.dir/HttpClient.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HttpClient.dir/HttpClient.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpClient.cpp > CMakeFiles/HttpClient.dir/HttpClient.cpp.i
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpClient.cpp > CMakeFiles/HttpClient.dir/HttpClient.cpp.i
 
 CMakeFiles/HttpClient.dir/HttpClient.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HttpClient.dir/HttpClient.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpClient.cpp -o CMakeFiles/HttpClient.dir/HttpClient.cpp.s
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpClient.cpp -o CMakeFiles/HttpClient.dir/HttpClient.cpp.s
 
 CMakeFiles/HttpClient.dir/HttpOptions.cpp.o: CMakeFiles/HttpClient.dir/flags.make
 CMakeFiles/HttpClient.dir/HttpOptions.cpp.o: ../HttpOptions.cpp
 CMakeFiles/HttpClient.dir/HttpOptions.cpp.o: CMakeFiles/HttpClient.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/andreea/Desktop/git/Client-HTTP---Practica2024/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/HttpClient.dir/HttpOptions.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HttpClient.dir/HttpOptions.cpp.o -MF CMakeFiles/HttpClient.dir/HttpOptions.cpp.o.d -o CMakeFiles/HttpClient.dir/HttpOptions.cpp.o -c /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpOptions.cpp
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HttpClient.dir/HttpOptions.cpp.o -MF CMakeFiles/HttpClient.dir/HttpOptions.cpp.o.d -o CMakeFiles/HttpClient.dir/HttpOptions.cpp.o -c /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpOptions.cpp
 
 CMakeFiles/HttpClient.dir/HttpOptions.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HttpClient.dir/HttpOptions.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpOptions.cpp > CMakeFiles/HttpClient.dir/HttpOptions.cpp.i
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpOptions.cpp > CMakeFiles/HttpClient.dir/HttpOptions.cpp.i
 
 CMakeFiles/HttpClient.dir/HttpOptions.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HttpClient.dir/HttpOptions.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpOptions.cpp -o CMakeFiles/HttpClient.dir/HttpOptions.cpp.s
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/andreea/Desktop/git/Client-HTTP---Practica2024/HttpOptions.cpp -o CMakeFiles/HttpClient.dir/HttpOptions.cpp.s
 
 # Object files for target HttpClient
 HttpClient_OBJECTS = \
