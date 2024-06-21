@@ -80,11 +80,85 @@ void HttpClient::setCookieFile(const std::string& cookieFilePath)
     curl_easy_setopt(curl, CURLOPT_COOKIEJAR, cookieFilePath.c_str());
 }
 
+void HttpClient::setTimeout(long timeout)
+{
+    curl_easy_setopt(curl,CURLOPT_TIMEOUT,timeout);
+}
+
+void HttpClient::setRetry(int retries)
+{
+    this->retries=retries;
+}
+
+void HttpClient::enableDebugging(bool enabled)
+{
+    this->debug=enabled;
+    curl_easy_setopt(curl, CURLOPT_VERBOSE,enabled ? 1L : 0L);
+}
+
+void HttpClient::logDebugInfo(const std::string& message)
+{
+    if(debug)
+    {
+        std::cerr<<"DEBUG: "<<message<<std::endl;
+    }
+}
+
+void HttpClient::performRequestWithRetries(const std::string& method, const std::string& url, std::string& readBuffer)
+{
+    CURLcode res;
+    int attempt=0;
+    while(attempt<retries)
+    {
+        readBuffer.clear();
+        curl_easy_setopt(curl,CURLOPT_CUSTOMREQUEST,method.c_str());
+        curl_easy_setopt(curl,CURLOPT_URL,url.c_str());
+        curl_easy_setopt(curl,CURLOPT_WRITEFUNCTION,WriteCallback);
+        curl_easy_setopt(curl,CURLOPT_WRITEDATA,&readBuffer);
+        res=curl_easy_perform(curl);
+
+        if(res==CURLE_OK)
+        {
+            break;
+        }
+
+        logDebugInfo("Retry attempt " + std::to_string(attempt+1) + std::string(curl_easy_strerror(res)));
+        attempt++;
+
+    }
+
+    if(res != CURLE_OK)
+    {
+        throw std::runtime_error("Failed to perform request: "+ std::string(curl_easy_strerror(res)));
+    }
+
+}
+
+void HttpClient::setProxy(const std::string& proxyAddress, int proxyPort) 
+{
+    curl_easy_setopt(curl, CURLOPT_PROXY, proxyAddress.c_str());
+    curl_easy_setopt(curl, CURLOPT_PROXYPORT, proxyPort);
+}
+
+void HttpClient::setCachePaths(const std::string& cacheDirectory) 
+{
+    std::string cookieFilePath = cacheDirectory + "/cookies";
+    std::string sslCertPath = cacheDirectory + "/client.pem";
+
+    curl_easy_setopt(curl, CURLOPT_COOKIEFILE, cookieFilePath.c_str());
+    curl_easy_setopt(curl, CURLOPT_COOKIEJAR, cookieFilePath.c_str());
+    curl_easy_setopt(curl, CURLOPT_SSLCERT, sslCertPath.c_str());
+    curl_easy_setopt(curl, CURLOPT_SSLKEY, sslCertPath.c_str());
+}
+
+
 std::string HttpClient::request(const std::string& method, const std::string& url, const HttpOptions& options) {
     if (!curl) {
         throw std::runtime_error("CURL is not initialized");
     }
 
+    //setare proxy si cache path - DE IMPLEMENTAT
+    
     std::string readBuffer;
 
     curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, method.c_str());
@@ -115,6 +189,17 @@ std::string HttpClient::request(const std::string& method, const std::string& ur
     if (method == "HEAD") {
         curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
     }
+
+    //gestionare autentificare basic
+    if(options.hasUsernameAndPassword())
+    {
+        std::string authString=options.getUsername() + ":" + options.getPassword();
+        curl_easy_setopt(curl, CURLOPT_HTTPAUTH,CURLAUTH_BASIC);
+        curl_easy_setopt(curl,CURLOPT_USERPWD,authString.c_str());
+    }
+
+    //prelucrare retry
+    performRequestWithRetries(method,url,readBuffer);
 
     //cererile HTTP
     CURLcode res = curl_easy_perform(curl);
@@ -180,8 +265,58 @@ void HttpClient::setHttpSettings()
     curl_easy_setopt(curl,CURLOPT_SSL_VERIFYHOST,2L);
 
     //setare cale catre fisier CA
-    curl_easy_setopt(curl,CURLOPT_CAINFO,"path_to_ca_cert_file.pem");
-
+    curl_easy_setopt(curl,CURLOPT_CAINFO,"/etc/ssl/certs/ca-certificates.crt");
+   
     //versiune ssl/tls
     curl_easy_setopt(curl, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+}
+
+
+
+void HttpClient::setCacheSettings(bool enableCache, const std::string& cacheDirectory)
+{
+    //daca este activata
+    if(enableCache)
+    {
+        setCachePaths(cacheDirectory);
+        curl_easy_setopt(curl, CURLOPT_BUFFERSIZE,8192L); //dim buffer cache
+        curl_easy_setopt(curl, CURLOPT_FRESH_CONNECT,0L); //nu se conecteaza datele noi la cache
+        curl_easy_setopt(curl, CURLOPT_FORBID_REUSE, 0L); //se permite reutilizarea conexiunilor existente
+        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);//se activeaza mesajele verbose pentru debugging cache
+        curl_easy_setopt(curl, CURLOPT_NETRC, 1L);//se permite utilizarea fisierului .netrc pentru autentificare
+
+        //setez directorul cache
+        curl_easy_setopt(curl, CURLOPT_COOKIEJAR, (cacheDirectory + "/cookies").c_str());
+        curl_easy_setopt(curl, CURLOPT_COOKIEFILE, (cacheDirectory + "/cookies").c_str());
+        curl_easy_setopt(curl, CURLOPT_SSLCERT, (cacheDirectory + "/client.pem").c_str());
+        curl_easy_setopt(curl, CURLOPT_SSLKEY, (cacheDirectory + "/client.pem").c_str());
+
+        //activez cache
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+
+    } else{
+        //daca nu este activata, se dezactiveaza setarile de cache
+        curl_easy_setopt(curl, CURLOPT_BUFFERSIZE, 16384L);
+        curl_easy_setopt(curl, CURLOPT_FRESH_CONNECT, 1L);//conectare la date noi, fara cache
+        curl_easy_setopt(curl, CURLOPT_FORBID_REUSE, 1L);//nu se reutilizeaza conexiunile existente
+        curl_easy_setopt(curl, CURLOPT_VERBOSE, 0L);//dezactivare mesaje verbose
+        curl_easy_setopt(curl, CURLOPT_NETRC, 0L);//dezactivare .netrc
+
+        //dezactivare cache
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+    }
+}
+
+void HttpClient::setProxySettings(bool enableProxy, const std::string& proxyAddress)
+{
+    if(enableProxy)
+    {
+        //activare proxy
+        curl_easy_setopt(curl,CURLOPT_PROXY,proxyAddress.c_str());
+        curl_easy_setopt(curl,CURLOPT_PROXYPORT,8080L);//port proxy
+    } else{
+        //dezactivare proxy
+        curl_easy_setopt(curl,CURLOPT_PROXY,"");
+        curl_easy_setopt(curl,CURLOPT_PROXYPORT,0L);
+    }
 }

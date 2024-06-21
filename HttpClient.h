@@ -25,6 +25,16 @@ public:
     void logCookies();
     void setHttpSettings();
 
+    void setTimeout(long timeout);
+    void setRetry(int retries);
+    void enableDebugging(bool enable);
+
+    void setProxy(const std::string& proxyAddress, int proxyPort);
+    void setCachePaths(const std::string& cacheDirectory);
+
+    void setCacheSettings(bool enableCAche, const std::string& cacheDirectory);
+    void setProxySettings(bool enableProxy, const std::string& proxyAddress);
+
 private:
     static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp);
     static size_t HeaderCallback(void* buffer, size_t size, size_t nmemb, void* userp);
@@ -33,6 +43,12 @@ private:
     std::string baseUri;
     struct curl_slist* headers;
     FILE* cookieFile;
+    int retries;
+    bool debug;
+
+    void logDebugInfo(const std::string& message);
+    void performRequestWithRetries(const std::string& method, const std::string& url,std::string& readBuffer);
+   
 };
 
 #endif

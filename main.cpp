@@ -49,12 +49,22 @@ int main() {
     {
         //initializare client
         HttpClient client;
-
-        //setare fisier cookie
-        client.setCookieFile("cookie.txt");
-
         //activare setari https
         client.setHttpSettings();
+        //setare fisier cookie
+        client.setCookieFile("cookie.txt");
+        //10 sec timeout
+        client.setTimeout(10);
+        //3 retries
+        client.setRetry(3);
+        //activare debugging
+        client.enableDebugging(true);
+        
+        //activare cache si setare dire cache
+
+
+        //activare proxy si setare adresa proxy
+       
 
         //setare a antetelor personalizate
         std::map<std::string, std::string> headers;
@@ -62,6 +72,9 @@ int main() {
         options.setBaseUri("https://jsonplaceholder.typicode.com");
         options.setHeader("Content-Type", "application/json");
         options.setHeader("Authorization", "Bearer token123");
+
+        options.setUsername("username");
+        options.setPassword("parola");
 
       // GET
         std::string getUrl = "https://jsonplaceholder.typicode.com/posts/1";

@@ -35,3 +35,23 @@ const std::string& HttpOptions::getHeader(const std::string& headerName) const {
 void HttpOptions::removeHeader(const std::string& headerName) {
     headers.erase(headerName);
 }
+
+void HttpOptions::setUsername(const std::string& username) {
+    this->username = username;
+}
+
+std::string HttpOptions::getUsername() const {
+    return username;
+}
+
+void HttpOptions::setPassword(const std::string& password) {
+    this->password = password;
+}
+
+std::string HttpOptions::getPassword() const {
+    return password;
+}
+
+bool HttpOptions::hasUsernameAndPassword() const {
+    return !username.empty() && !password.empty();
+}
