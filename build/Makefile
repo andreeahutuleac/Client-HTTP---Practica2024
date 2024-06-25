@@ -177,6 +177,30 @@ HttpOptions.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HttpClient.dir/build.make CMakeFiles/HttpClient.dir/HttpOptions.cpp.s
 .PHONY : HttpOptions.cpp.s
 
+Weather.o: Weather.cpp.o
+.PHONY : Weather.o
+
+# target to build an object file
+Weather.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HttpClient.dir/build.make CMakeFiles/HttpClient.dir/Weather.cpp.o
+.PHONY : Weather.cpp.o
+
+Weather.i: Weather.cpp.i
+.PHONY : Weather.i
+
+# target to preprocess a source file
+Weather.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HttpClient.dir/build.make CMakeFiles/HttpClient.dir/Weather.cpp.i
+.PHONY : Weather.cpp.i
+
+Weather.s: Weather.cpp.s
+.PHONY : Weather.s
+
+# target to generate assembly for a file
+Weather.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HttpClient.dir/build.make CMakeFiles/HttpClient.dir/Weather.cpp.s
+.PHONY : Weather.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -216,6 +240,9 @@ help:
 	@echo "... HttpOptions.o"
 	@echo "... HttpOptions.i"
 	@echo "... HttpOptions.s"
+	@echo "... Weather.o"
+	@echo "... Weather.i"
+	@echo "... Weather.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

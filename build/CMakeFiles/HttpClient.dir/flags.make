@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/g++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/andreea/Desktop/git/Client-HTTP---Practica2024/build/jsoncpp/include -I/home/andreea/Desktop/git/Client-HTTP---Practica2024/json-develop/include
+CXX_INCLUDES = -I/home/andreea/Desktop/git/Client-HTTP---Practica2024/build/jsoncpp/include -I/home/andreea/Desktop/git/Client-HTTP---Practica2024/json-develop/include -I/home/andreea/Desktop/git/Client-HTTP---Practica2024/tinyxml2-master
 
 CXX_FLAGS = -g -std=gnu++11
 

@@ -1,0 +1,3 @@
+/home/andreea/Desktop/git/Client-HTTP---Practica2024/tinyxml2-master/CMakeFiles/HttpClient.dir
+/home/andreea/Desktop/git/Client-HTTP---Practica2024/tinyxml2-master/CMakeFiles/edit_cache.dir
+/home/andreea/Desktop/git/Client-HTTP---Practica2024/tinyxml2-master/CMakeFiles/rebuild_cache.dir
