@@ -15,15 +15,28 @@ struct WeatherData
 {
     float temperature;
     float feels_like;
-    std::string conditions;
-    float wind_speed;
     float max_temperature;
     float min_temperature;
     int humidity;
     int pressure;
+    float wind_speed;
+    int wind_deg;
     float visibility;
-    int uv_index;
+    float uv_index;
     float dew_point;
+    std::string conditions;
+    std::string cityName;
+    std::string country;
+    std::string country_code;
+    std::string timezone;
+    int64_t sunrise;
+    int64_t sunset;
+    int64_t dt;
+    int64_t timezone_offset;
+    int clouds;
+    std::string weather_main;
+    std::string weather_description;
+    std::string weather_icon;
 };
 
 class Weather
@@ -39,11 +52,21 @@ public:
     void printWeatherData() const;
     void updateWeatherData();
 
+    void setCityId(const std::string& newCityId);
+    void setCityName(const std::string& newCityName);
+    void setCountryName(const std::string& newCountryName);
+    std:: string findCityIdByName(const std::string& cityName, const std::string& cityListFilePath);
+   
+    void readPrintCountriesFromFile(const std::string& countryListFilePath);
+
 private:
     std::string apiKey;
     std:: string cityId;
-    std:: string cityName;
+    std:: string city_name;
+    std:: string country_name;
     std::string weather_url;
+    std::string cityListFilePath;
+    std::string countryListFilePath;
 
     std::string body;
     WeatherData weather_data;
@@ -57,7 +80,12 @@ private:
     std::string detectResponseType(const std::string& response);
     bool fetchWeatherData();
     void run();
+
+    std::string jsonFilePath;
+    void readCitiesFromJson(const std::string& jsonFilePath);
+    void readCityFromFile(const std::string& cityId, const std::string& cityListFilePath);
    
+
 };
 
 

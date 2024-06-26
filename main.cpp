@@ -24,10 +24,11 @@ int main() {
   
     // if(curl) {
     //     //configurare url + callback pt scrierea raspunsului
-    //     curl_easy_setopt(curl, CURLOPT_URL, "https://jsonplaceholder.typicode.com");
+    //     curl_easy_setopt(curl, CURLOPT_URL, "https://openweathermap.org/");
     //     std::string readBuffer;
     //     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
     //     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+    
         
     //     //cerere HTTP
     //     CURLcode res = curl_easy_perform(curl);
@@ -47,7 +48,7 @@ int main() {
 
     // curl_global_cleanup();
 
-    // //cereri HTTP
+    // // //cereri HTTP
     // try
     // {
     //     //initializare client
@@ -73,44 +74,44 @@ int main() {
     //     //setare a antetelor personalizate
     //     std::map<std::string, std::string> headers;
     //     HttpOptions options;
-    //     options.setBaseUri("https://jsonplaceholder.typicode.com");
+    //     options.setBaseUri("https://openweathermap.org/");
     //     options.setHeader("Content-Type", "application/json");
     //     options.setHeader("Authorization", "Bearer token123");
 
     //     options.setUsername("username");
     //     options.setPassword("parola");
 
-    //   // GET
-    //     std::string getUrl = "https://jsonplaceholder.typicode.com/posts/1";
+    // //   // GET
+    //     std::string getUrl = "https://openweathermap.org/";
     //     std::string getResponse = client.request("GET", getUrl,options);
     //     std::cout << "GET Response: " << getResponse << std::endl;
 
-    //     // POST
-    //     std::string postUrl = "https://jsonplaceholder.typicode.com/posts";
+    // //     // POST
+    //     std::string postUrl = "https://openweathermap.org/";
     //     std::string postData = R"({"title": "foo", "body": "bar", "userId": 1})";
     //     options.setHeader("Content-Lenght",std::to_string(postData.length()));
     //     std::string postResponse = client.request("POST", postUrl, options);
     //     std::cout << "POST Response: " << postResponse << std::endl;
 
     //     // PUT
-    //     std::string putUrl = "https://jsonplaceholder.typicode.com/posts/1";
+    //     std::string putUrl = "https://openweathermap.org/";
     //     std::string putData = R"({"id": 1, "title": "foo", "body": "bar", "userId": 1})";
     //     options.setHeader("Content-Lenght",std::to_string(postData.length()));
     //     std::string putResponse = client.request("PUT", putUrl, options);
     //     std::cout << "PUT Response: " << putResponse << std::endl;
 
     //     // DELETE
-    //     std::string delUrl = "https://jsonplaceholder.typicode.com/posts/1";
+    //     std::string delUrl = "https://openweathermap.org/";
     //     std::string delResponse = client.request("DELETE", delUrl,options);
     //     std::cout << "DELETE Response: " << delResponse << std::endl;
 
     //     // HEAD
-    //     std::string headUrl = "https://jsonplaceholder.typicode.com/posts/1";
+    //     std::string headUrl = "https://openweathermap.org/";
     //     std::string headResponse = client.request("HEAD", headUrl,options);
     //     std::cout << "HEAD Response: " << headResponse << std::endl;
 
     //     // OPTIONS
-    //     std::string optionsUrl = "https://jsonplaceholder.typicode.com";
+    //     std::string optionsUrl = "https://openweathermap.org/";
     //     std::string optionsResponse = client.request("OPTIONS", optionsUrl,options);
     //     std::cout << "OPTIONS Response: " << optionsResponse << std::endl;
 
@@ -130,49 +131,41 @@ int main() {
     
 
     const std::string apiKey="2e141feae1407d873cf806d90627a0e4";
-    const std::string cityId="683506";
+    //const std::string cityId="683506";
+    std::string cityListFilePath="/home/andreea/Desktop/git/Client-HTTP---Practica2024/city_list.txt";
+    std::string countryListFilePath="/home/andreea/Desktop/git/Client-HTTP---Practica2024/country_list.txt";
 
-    Weather weather(apiKey,cityId);
+   // Weather weather(apiKey,cityId);
+
+    Weather weather(apiKey, "");
+
+    std::string cityName,countryName;
+    std::cout << "Introduceti numele orasului: ";
+    std::getline(std::cin, cityName);
+
+    weather.readPrintCountriesFromFile(countryListFilePath);
+
+    std::cout << "Introduceti acronimul tarii: ";
+    std::getline(std::cin, countryName);
+  
+
+    std::string cityIdStr = weather.findCityIdByName(cityName, cityListFilePath);
+    
+    if (cityIdStr.empty()) {
+        std::cerr << "Could not find city ID for '" << cityName << "'. Exiting." << std::endl;
+        return 1;
+    }
+
+      
+    weather.setCityName(cityName);
+    weather.setCountryName(countryName);
+    weather.setCityId(cityIdStr);
     weather.start();
 
-    std::this_thread::sleep_for(std::chrono::seconds(10));
 
-    WeatherData weather_data=weather.getWeatherData();
-
-    std::cout << "City: " << cityId << std::endl;
-    std::cout << "Weather Data:" << std::endl;
-    std::cout << "Temperature: " << std::fixed << std::setprecision(2) << weather_data.temperature << " °C" << std::endl;
-    std::cout << "Feels like: " << std::fixed << std::setprecision(2) << weather_data.feels_like << "°C" << std::endl;
-    std::cout << "Weather conditions: " << weather_data.conditions << std::endl;
-    std::cout << "Wind speed: " << std::fixed << std::setprecision(2) << weather_data.wind_speed << " m/s" << std::endl;
-    std::cout << "Max Temperature: " << std::fixed << std::setprecision(2) << weather_data.max_temperature << " °C" << std::endl;
-    std::cout << "Min Temperature: " << std::fixed << std::setprecision(2) << weather_data.min_temperature << " °C" << std::endl;
-    std::cout << "Humidity: " << weather_data.humidity << "%" << std::endl;
-    std::cout << "Pressure: " << weather_data.pressure << " hPa" << std::endl;
-    std::cout << "Visibility: " << std::fixed << std::setprecision(2) << weather_data.visibility << " km" << std::endl;
-    std::cout << "UV Index: " << weather_data.uv_index << std::endl;
-    std::cout << "Dew point: " << std::fixed << std::setprecision(2) << weather_data.dew_point << "°C" << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(5));
 
     weather.stop();
-
-   
-
-    // try
-    // {
-    //     Weather weather(apiKey, cityId);
-    //     weather.start();
-
-    //     //std::this_thread::sleep_for(std::chrono::minutes(5));
-    //     std::this_thread::sleep_for(std::chrono::seconds(10));
-
-    //     weather.stop();
-    // }
-    // catch (const std::exception& e)
-    // {
-    //     std::cerr << "Exception: " << e.what() << std::endl;
-    //     return 1;
-    // }
-
 
     return 0;
 }

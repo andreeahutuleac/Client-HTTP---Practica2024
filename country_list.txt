@@ -1,0 +1,248 @@
+AD - Andorra
+AE - Emiratele Arabe Unite
+AF - Afganistan
+AG - Antigua si Barbuda
+AI - Anguilla
+AL - Albania
+AM - Armenia
+AO - Angola
+AQ - Antarctica
+AR - Argentina
+AS - Samoa Americana
+AT - Austria
+AU - Australia
+AW - Aruba
+AX - Insulele Aland
+AZ - Azerbaidjan
+BA - Bosnia si Hertegovina
+BB - Barbados
+BD - Bangladesh
+BE - Belgia
+BF - Burkina Faso
+BG - Bulgaria
+BH - Bahrain
+BI - Burundi
+BJ - Benin
+BL - Saint Barthelemy
+BM - Bermuda
+BN - Brunei Darussalam
+BO - Bolivia (Statul Plurinational)
+BQ - Bonaire, Sint Eustatius si Saba
+BR - Brazilia
+BS - Bahamas
+BT - Bhutan
+BV - Insula Bouvet
+BW - Botswana
+BY - Belarus
+BZ - Belize
+CA - Canada
+CC - Insulele Cocos (Keeling)
+CD - Republica Democrata Congo
+CF - Republica Centrafricana
+CG - Congo
+CH - Elvetia
+CI - Cote d'Ivoire
+CK - Insulele Cook
+CL - Chile
+CM - Camerun
+CN - China
+CO - Columbia
+CR - Costa Rica
+CU - Cuba
+CV - Cabo Verde
+CW - Curacao
+CX - Insula Christmas
+CY - Cipru
+CZ - Cehia
+DE - Germania
+DJ - Djibouti
+DK - Danemarca
+DM - Dominica
+DO - Republica Dominicana
+DZ - Algeria
+EC - Ecuador
+EE - Estonia
+EG - Egipt
+EH - Sahara Occidentala
+ER - Eritreea
+ES - Spania
+ET - Etiopia
+FI - Finlanda
+FJ - Fiji
+FK - Insulele Falkland (Malvine)
+FM - Micronezia (Statele Federate ale)
+FO - Insulele Feroe
+FR - Franta
+GA - Gabon
+GB - Regatul Unit al Marii Britanii si al Irlandei de Nord
+GD - Grenada
+GE - Georgia
+GF - Guiana Franceza
+GG - Guernsey
+GH - Ghana
+GI - Gibraltar
+GL - Groenlanda
+GM - Gambia
+GN - Guineea
+GP - Guadelupa
+GQ - Guineea Ecuatoriala
+GR - Grecia
+GT - Guatemala
+GU - Guam
+GW - Guineea-Bissau
+GY - Guyana
+HK - Hong Kong
+HM - Insulele Heard si McDonald
+HN - Honduras
+HR - Croatia
+HT - Haiti
+HU - Ungaria
+ID - Indonezia
+IE - Irlanda
+IL - Israel
+IM - Insula Man
+IN - India
+IO - Teritoriul Britanic din Oceanul Indian
+IQ - Irak
+IR - Iran (Republica Islamica)
+IS - Islanda
+IT - Italia
+JE - Jersey
+JM - Jamaica
+JO - Iordania
+JP - Japonia
+KE - Kenya
+KG - Kirghizstan
+KH - Cambodgia
+KI - Kiribati
+KM - Comore
+KN - Saint Kitts si Nevis
+KP - Coreea de Nord (Republica Populara Democrata)
+KR - Coreea de Sud (Republica)
+KW - Kuwait
+KY - Insulele Cayman
+KZ - Kazakhstan
+LA - Laos (Republica Democrata Populara)
+LB - Liban
+LC - Sfanta Lucia
+LI - Liechtenstein
+LK - Sri Lanka
+LR - Liberia
+LS - Lesotho
+LT - Lituania
+LU - Luxemburg
+LV - Letonia
+LY - Libia
+MA - Maroc
+MC - Monaco
+MD - Republica Moldova
+ME - Muntenegru
+MF - Sfantul Martin (parte franceza)
+MG - Madagascar
+MH - Insulele Marshall
+MK - Macedonia de Nord (Fosta Republica Iugoslava a Macedoniei)
+ML - Mali
+MM - Myanmar (Birmania)
+MN - Mongolia
+MO - Macao
+MP - Insulele Mariane de Nord
+MQ - Martinica
+MR - Mauritania
+MS - Montserrat
+MT - Malta
+MU - Mauritius
+MV - Maldive
+MW - Malawi
+MX - Mexic
+MY - Malaysia
+MZ - Mozambic
+NA - Namibia
+NC - Noua Caledonie
+NE - Niger
+NF - Insula Norfolk
+NG - Nigeria
+NI - Nicaragua
+NL - Tarile de Jos (Olanda)
+NO - Norvegia
+NP - Nepal
+NR - Nauru
+NU - Niue
+NZ - Noua Zeelanda
+OM - Oman
+PA - Panama
+PE - Peru
+PF - Polinezia Franceza
+PG - Papua Noua Guinee
+PH - Filipine
+PK - Pakistan
+PL - Polonia
+PM - Saint Pierre si Miquelon
+PN - Insulele Pitcairn
+PR - Puerto Rico
+PS - Autoritatea Palestiniana
+PT - Portugalia
+PW - Palau
+PY - Paraguay
+QA - Qatar
+RE - Reuniune
+RO - Romania
+RS - Serbia
+RU - Rusia (Federatia Rusa)
+RW - Rwanda
+SA - Arabia Saudita
+SB - Insulele Solomon
+SC - Seychelles
+SD - Sudan
+SE - Suedia
+SG - Singapore
+SH - Sfanta Elena, Ascension si Tristan da Cunha
+SI - Slovenia
+SJ - Svalbard si Jan Mayen
+SK - Slovacia
+SL - Sierra Leone
+SM - San Marino
+SN - Senegal
+SO - Somalia
+SR - Suriname
+SS - Sudanul de Sud
+ST - Sao Tome si Principe
+SV - El Salvador
+SX - Sint Maarten (partea olandeza)
+SY - Siria
+SZ - Swaziland
+TC - Insulele Turks si Caicos
+TD - Ciad
+TF - Teritoriile Australe si Antarctice Franceze
+TG - Togo
+TH - Thailanda
+TJ - Tadjikistan
+TK - Tokelau
+TL - Timor-Leste
+TM - Turkmenistan
+TN - Tunisia
+TO - Tonga
+TR - Turcia
+TT - Trinidad si Tobago
+TV - Tuvalu
+TW - Taiwan (Republica Chineza)
+TZ - Tanzania
+UA - Ucraina
+UG - Uganda
+UM - Statele Unite ale Americii Insulele Minore Indepartate
+US - Statele Unite ale Americii
+UY - Uruguay
+UZ - Uzbekistan
+VA - Statul Vatican
+VC - Sfantul Vincent si Grenadinele
+VE - Venezuela (Republica Bolivariana)
+VG - Insulele Virgine Britanice
+VI - Insulele Virgine Americane
+VN - Vietnam
+VU - Vanuatu
+WF - Wallis si Futuna
+WS - Samoa
+YE - Yemen
+YT - Mayotte
+ZA - Africa de Sud
+ZM - Zambia
+ZW - Zimbabwe
