@@ -29,14 +29,19 @@ struct WeatherData
     std::string country;
     std::string country_code;
     std::string timezone;
+    std::string base;
+    std::string name;
     int64_t sunrise;
     int64_t sunset;
     int64_t dt;
     int64_t timezone_offset;
     int clouds;
-    std::string weather_main;
-    std::string weather_description;
-    std::string weather_icon;
+    std::string weather_overview;
+    float latitude;
+    float longitude;
+    float wind_gust;
+    int wind_direction;
+    float rain_volume;
 };
 
 class Weather
@@ -65,6 +70,9 @@ private:
     std:: string city_name;
     std:: string country_name;
     std::string weather_url;
+    std::string uv_url;
+    std::string overview_url;
+    std::string dew_point_url;
     std::string cityListFilePath;
     std::string countryListFilePath;
 
@@ -78,6 +86,7 @@ private:
     void parseJsonResponse(const std::string& response);
     void parseXmlResponse(const std::string& xmlResponse);
     std::string detectResponseType(const std::string& response);
+    void fetchWeatherOverview(float lat, float lon);
     bool fetchWeatherData();
     void run();
 

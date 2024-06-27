@@ -13,8 +13,10 @@
 Weather::Weather(const std::string& apiKey, const std::string& cityId)
     :apiKey(apiKey), cityId(cityId),cityListFilePath("city_list.txt"), countryListFilePath("country_list.txt"), stop_thread(false)
 {
-
     this->weather_url = "http://api.openweathermap.org/data/2.5/weather?id=" + cityId + "&appid=" + apiKey + "&units=metric";//&mode=xml";
+    //this->uv_url= "http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid=" + apiKey;
+    //this->dew_point_url ="http://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid=" + apiKey + "&units=metric";
+
 }
 
 Weather::~Weather()
@@ -58,57 +60,7 @@ void Weather::parseJsonResponse(const std::string& jsonResponse)
 
     std::lock_guard<std::mutex> lock(data_mutex);
 
-    // weather_data.timezone = root["timezone"].asString();
-    // weather_data.timezone_offset = root["timezone_offset"].asInt64();
-
-    // if (root.isMember("main"))
-    // {
-    //     if (root["main"].isMember("temp"))
-    //         weather_data.temperature = root["main"]["temp"].asFloat();
-
-    //     if (root["main"].isMember("feels_like"))
-    //         weather_data.feels_like = root["main"]["feels_like"].asFloat();
-
-    //     if (root["main"].isMember("temp_max"))
-    //         weather_data.max_temperature = root["main"]["temp_max"].asFloat();
-
-    //     if (root["main"].isMember("temp_min"))
-    //         weather_data.min_temperature = root["main"]["temp_min"].asFloat();
-
-    //     if (root["main"].isMember("humidity"))
-    //         weather_data.humidity = root["main"]["humidity"].asInt();
-
-    //     if (root["main"].isMember("pressure"))
-    //         weather_data.pressure = root["main"]["pressure"].asInt();
-    // }
-
-    // if (root.isMember("weather") && root["weather"].isArray() && root["weather"].size() > 0)
-    // {
-    //     weather_data.conditions = root["weather"][0]["description"].asString();
-    // }
-
-    // if (root.isMember("wind") && root["wind"].isMember("speed"))
-    // {
-    //     weather_data.wind_speed = root["wind"]["speed"].asFloat();
-    // }
-
-    // if (root.isMember("visibility"))
-    // {
-    //     weather_data.visibility = root["visibility"].asFloat() / 1000.0f;
-    // }
-
-    // if (root.isMember("dew_point"))
-    // {
-    //     weather_data.dew_point = root["dew_point"].asFloat();
-    // }
-
-    // if (root.isMember("uvi"))
-    // {
-    //     weather_data.uv_index = root["uvi"].asInt();
-    // }
-
-  
-
+    
     weather_data.temperature = root["main"]["temp"].asFloat();
     weather_data.feels_like = root["main"]["feels_like"].asFloat();
     weather_data.max_temperature = root["main"]["temp_max"].asFloat();
@@ -118,15 +70,89 @@ void Weather::parseJsonResponse(const std::string& jsonResponse)
     weather_data.wind_speed = root["wind"]["speed"].asFloat();
     weather_data.wind_deg = root["wind"]["deg"].asInt();
     weather_data.visibility = root["visibility"].asFloat() / 1000.0f;
-    weather_data.uv_index = root["current"]["uvi"].asFloat();
-    weather_data.dew_point = root["current"]["dew_point"].asFloat();
     weather_data.conditions = root["weather"][0]["description"].asString();
-    weather_data.timezone = root["timezone"].asString();
-    weather_data.sunrise = root["current"]["sunrise"].asInt64();
-    weather_data.sunset = root["current"]["sunset"].asInt64();
-    weather_data.dt = root["current"]["dt"].asInt64();
-    weather_data.timezone_offset = root["timezone_offset"].asInt64();
+
+    float lat = root["coord"]["lat"].asFloat();
+    float lon = root["coord"]["lon"].asFloat();
+
+    this->uv_url = "http://api.openweathermap.org/data/2.5/uvi?lat=" + std::to_string(lat) + "&lon=" + std::to_string(lon) + "&appid=" + this->apiKey;
+   //this->dew_point_url = "http://api.openweathermap.org/data/2.5/onecall?lat=" + std::to_string(lat) + "&lon=" + std::to_string(lon) + "&appid=" + this->apiKey;
+
+    HttpClient client;
+    HttpOptions options;
+    std::string uvResponse = client.request("GET", uv_url, options);
+
+    Json::Value uvRoot;
+    std::istringstream uvStream(uvResponse);
+    if (!Json::parseFromStream(builder, uvStream, &uvRoot, &errors))
+    {
+        throw std::runtime_error("Failed to parse UV JSON: " + errors);
+    }
+
+    weather_data.uv_index = uvRoot["value"].asFloat();
+
+    if (root.isMember("main") && root["main"].isMember("dew_point"))
+    {
+        weather_data.dew_point = root["main"]["dew_point"].asFloat();
+    }
+    else
+    {
+        weather_data.dew_point = 0.0f;
+    }
+
+    // std::string dewPointResponse = client.request("GET", dew_point_url, options);
+    // Json::Value dewPointRoot;
+    // std::istringstream dewPointStream(dewPointResponse);
+    // if (!Json::parseFromStream(builder, dewPointStream, &dewPointRoot, &errors))
+    // {
+    //     throw std::runtime_error("Failed to parse Dew Point JSON: " + errors);
+    // }
+
+    // if (dewPointRoot.isMember("current") && dewPointRoot["current"].isObject()) {
+    //     weather_data.dew_point = dewPointRoot["current"]["dew_point"].asFloat();
+    // }   else {
+    // throw std::runtime_error("Invalid JSON structure for dew_point data.");
+    // }
+
     weather_data.clouds = root["clouds"]["all"].asInt();
+    weather_data.dt = root["dt"].asInt64();
+    weather_data.timezone_offset = root["timezone_offset"].asInt64();
+    weather_data.sunrise = root["sys"]["sunrise"].asInt64();
+    weather_data.sunset = root["sys"]["sunset"].asInt64();
+    weather_data.country = root["sys"]["country"].asString();
+    weather_data.name = root["name"].asString();
+    weather_data.base = root["base"].asString();
+
+    
+    if (root.isMember("current") && root["current"].isObject() && root["current"].isMember("dew_point")) {
+        weather_data.dew_point = root["current"]["dew_point"].asFloat();
+    }
+    else {
+        weather_data.dew_point = 0.0; 
+    }
+
+
+    weather_data.conditions = root["weather"][0]["description"].asString();
+    weather_data.wind_gust = root["wind"]["gust"].asFloat();
+    weather_data.wind_direction = root["wind"]["deg"].asInt();
+    weather_data.rain_volume = root["rain"]["1h"].asFloat();
+    std::stringstream weatherOverview;
+    weatherOverview << "The current weather is " << weather_data.conditions
+                    << " with a temperature of " << weather_data.temperature << "°C"
+                    << " and a feels-like temperature of " << weather_data.feels_like << "°C."
+                    << " The wind speed is " << weather_data.wind_speed << " m/s"
+                    << " with gusts up to " << weather_data.wind_gust << " m/s"
+                    << " coming from " << weather_data.wind_direction << "°."
+                    << " The air pressure is at " << weather_data.pressure << " hPa"
+                    << " with a humidity level of " << weather_data.humidity << "%."
+                    << " The dew point is at " << weather_data.dew_point << "°C."
+                    << " The visibility is " << weather_data.visibility << " km."
+                    << " The UV index is at " << weather_data.uv_index << "."
+                    << " The sky is covered with " << weather_data.clouds << "% clouds."
+                    << " There is " << (weather_data.rain_volume > 0 ? "rain" : "no precipitation")
+                    << " expected at the moment.";
+
+    weather_data.weather_overview = weatherOverview.str();
 
     readCitiesFromJson(jsonFilePath);
 }
@@ -398,6 +424,38 @@ std::string Weather::detectResponseType(const std::string& response) {
     return "unknown";
 }
 
+void Weather::fetchWeatherOverview(float lat, float lon)
+{
+    this->overview_url = "https://api.openweathermap.org/data/3.0/onecall/overview?lat=" + std::to_string(lat) + "&lon=" + std::to_string(lon) + "&appid=" + apiKey;
+
+    HttpClient client;
+    HttpOptions options;
+
+    try {
+        std::string response = client.request("GET", overview_url, options);
+
+        Json::Value root;
+        Json::CharReaderBuilder builder;
+        std::string errors;
+        std::istringstream s(response);
+
+        if (!Json::parseFromStream(builder, s, &root, &errors))
+        {
+            throw std::runtime_error("Failed to parse JSON: " + errors);
+        }
+
+        if (root.isMember("weather_overview")) {
+            std::lock_guard<std::mutex> lock(data_mutex);
+            weather_data.conditions = root["weather_overview"]["description"].asString();
+        } else {
+            throw std::runtime_error("Key 'weather_overview' not found in JSON response.");
+        }
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error fetching overview data: " << e.what() << std::endl;
+    }
+}
+
 
 bool Weather::fetchWeatherData()
 {
@@ -426,6 +484,8 @@ bool Weather::fetchWeatherData()
             return false;
         }
         
+        //daca a avut succes in obtinerea datelor meteo, se solicita rezumatul condditiilot meteo
+        fetchWeatherOverview(weather_data.latitude, weather_data.longitude);
         return true;
     }
     catch (const std::exception& e)
@@ -457,12 +517,37 @@ void Weather::printWeatherData() const
     std::cout << "Wind Direction: " << weather_data.wind_deg << "°" << std::endl;
     std::cout << "Clouds: " << weather_data.clouds << "%" << std::endl;
     std::cout << "Conditions: " << weather_data.conditions << std::endl;
+    
+    std::cout << "Base: " << weather_data.base << std::endl;
+    std::cout << "Name: " << weather_data.name << std::endl;
     std::cout << "Timezone: " << weather_data.timezone << std::endl;
-    std::cout << "Sunrise: " << weather_data.sunrise << std::endl;
-    std::cout << "Sunset: " << weather_data.sunset << std::endl;
+   
+    // std::cout << "Sunrise: " << weather_data.sunrise << std::endl;
+    // std::cout << "Sunset: " << weather_data.sunset << std::endl;
+    // std::cout << "Data Time: " << weather_data.dt << std::endl;
+    // std::cout << "Timezone Offset: " << weather_data.timezone_offset << " seconds" << std::endl;
+
+    //convertire 
+    std::time_t sunrise_time = weather_data.sunrise + weather_data.timezone_offset;
+    std::time_t sunset_time = weather_data.sunset + weather_data.timezone_offset;
+
+    std::tm sunrise_tm = *std::gmtime(&sunrise_time);
+    std::tm sunset_tm = *std::gmtime(&sunset_time);
+
+    char sunrise_buffer[80];
+    char sunset_buffer[80];
+
+    std::strftime(sunrise_buffer, 80, "%Y-%m-%d %H:%M:%S", &sunrise_tm);
+    std::strftime(sunset_buffer, 80, "%Y-%m-%d %H:%M:%S", &sunset_tm);
+
+    std::cout << "Sunrise: " << sunrise_buffer << std::endl;
+    std::cout << "Sunset: " << sunset_buffer << std::endl;
     std::cout << "Data Time: " << weather_data.dt << std::endl;
     std::cout << "Timezone Offset: " << weather_data.timezone_offset << " seconds" << std::endl;
 
+    std::cout<<std::endl<<std::endl;
+
+    std::cout << "Weather Overview: " << weather_data.weather_overview << std::endl;
 }
 
 void Weather::updateWeatherData()
@@ -470,6 +555,7 @@ void Weather::updateWeatherData()
     if (fetchWeatherData())
     {
         std::cout << "Weather data updated." << std::endl;
+        fetchWeatherOverview(weather_data.latitude, weather_data.longitude);
         printWeatherData();
     }
     else
